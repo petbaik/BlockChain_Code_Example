@@ -17,16 +17,16 @@ class Blockchain{
 	}
 
 
-	getNextBlock(transaction){
+	getNextBlock(transactions){
 		let block = new Block()
 
-		transaction.forEach(function(){
+		transactions.forEach(function(transaction){
 			block.addTransaction(transaction)
 		})
 
 		let previousBlock = this.getPreviousBlock()
 		block.index = this.blocks.hash
-
+		block.previousHash = previousBlock.hash
 		block.hash = this.generateHash(block)
 
 		return block
